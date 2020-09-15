@@ -1,1 +1,1 @@
-# ait_game_dev_club_coivid_19_jam
+# ait_game_dev_club_covid_19_jam
