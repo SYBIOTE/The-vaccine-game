@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.578291
+
+[node name="player" type="KinematicBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.07873, 0 )
+shape = SubResource( 1 )
+
+[node name="ClippedCamera" type="ClippedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.27245, 0 )
