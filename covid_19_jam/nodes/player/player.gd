@@ -3,20 +3,16 @@ onready var MOVE_SPEED=12
 const JUMP_FORCE=30
 const gravity=.98
 const max_fall_speed=30
-const M_LOOK_SENS=1
+const M_LOOK_SENS=0.5
 const V_look_sens=1
-onready var counter=0
-var knocked=false
 onready var y_vel=0
-var interface
-var energyball
 var jumped
 onready var cam=$cam
 
 var move_vec=Vector3(0, 0, 0)
 
 func _ready(): 
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _input(event):
