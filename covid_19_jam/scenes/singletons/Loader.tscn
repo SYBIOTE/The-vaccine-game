@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/game/singletons/loader.gd" type="Script" id=1]
+[ext_resource path="res://textures/logos/logo.png" type="Texture" id=2]
+[ext_resource path="res://textures/fonts/Cave-Story.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "value"
+tracks/0/path = NodePath("background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.71, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("background/logo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.71, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("background/loading:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
+}
+
+[node name="Loader" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1024.0
+margin_bottom = -600.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="TextureRect" parent="background"]
+modulate = Color( 0, 0, 0, 0 )
+anchor_left = 0.008
+anchor_right = 0.223
+anchor_bottom = 0.137
+margin_left = -0.192
+margin_right = 1418.65
+margin_bottom = 517.8
+rect_scale = Vector2( 0.134195, 0.137269 )
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loading" type="RichTextLabel" parent="background"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.789
+anchor_top = 0.867
+anchor_right = 1.066
+anchor_bottom = 1.031
+margin_left = 0.0639648
+margin_top = -0.200012
+margin_right = -197.584
+margin_bottom = -67.6
+rect_scale = Vector2( 3.301, 3.18 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[tornado radius=2 freq=2] 
+  Loading..."
+text = " 
+  Loading..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
