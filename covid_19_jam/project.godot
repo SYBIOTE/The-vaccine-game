@@ -16,7 +16,17 @@ _global_script_class_icons={
 [application]
 
 config/name="covid_19_jam"
+run/main_scene="res://scenes/ui/title.tscn"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+Loader="*res://scenes/singletons/Loader.tscn"
+
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
 
 [input]
 
@@ -64,4 +74,5 @@ crouch={
 
 [rendering]
 
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"
