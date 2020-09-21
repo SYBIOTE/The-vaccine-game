@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://nodes/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Lab_equipment/MediumBottle.tscn" type="PackedScene" id=2]
 
 [node name="Test" type="Spatial"]
 
@@ -12,3 +13,8 @@ depth = 18.7613
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.03497, 0, 0, 0, 1.03497, 0, 0, 0, 1.03497, 0, 1.14042, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="MediumBottle" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0 )
