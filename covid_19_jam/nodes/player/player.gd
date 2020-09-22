@@ -51,6 +51,9 @@ func sight():
 			"door":
 #				print("door detected")
 				hintbar.show_hint("go to work?")
+				if Input.is_action_just_pressed("interact"):
+					Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
+				
 			"sanitiser":
 #				print("sanitizer detected")
 				hintbar.show_hint("use sanitizer?")
@@ -76,6 +79,8 @@ func sight():
 				hintbar.show_hint("the time is time_var")
 			"lab door":
 				hintbar.show_hint("go home?")
+				if Input.is_action_just_pressed("interact"):
+					Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
 			"lab computer":
 				hintbar.show_hint("cure progress cure_var%")
 			"testubes":
