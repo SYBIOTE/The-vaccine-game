@@ -123,5 +123,5 @@ func _on_fades_animation_finished(anim_name):
 	if anim_name =="fade_out":
 		if get_parent().name=="doc_room":
 			Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
-		if get_parent().name=="Labaratory":
+		if get_parent().name=="Laboratory":
 			Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
