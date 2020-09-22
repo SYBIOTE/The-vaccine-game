@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://nodes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ui/ingame_ui.tscn" type="PackedScene" id=2]
@@ -36,11 +36,38 @@ data = PoolVector3Array( -0.6208, -0.3211, -0.4184, -0.7402, -0.1925, -0.2598, -
 
 [sub_resource type="CapsuleMesh" id=1]
 
-[sub_resource type="Animation" id=2]
-resource_name = "crouch"
-
 [sub_resource type="SphereShape" id=3]
 radius = 0.599223
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
 
 [node name="player" type="KinematicBody"]
 transform = Transform( 0.3, 0, 0, 0, 0.6, 0, 0, 0, 0.3, 0, 0, 0 )
@@ -72,11 +99,22 @@ visible = false
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/crouch = SubResource( 2 )
-
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.4, 0, 0, 0, 1, 0, 0.225443, 0 )
 shape = SubResource( 3 )
 
 [node name="Control" parent="." instance=ExtResource( 2 )]
+
+[node name="fade" type="ColorRect" parent="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fades" type="AnimationPlayer" parent="Control/fade"]
+autoplay = "fade_in"
+anims/fade_in = SubResource( 2 )
+anims/fade_out = SubResource( 6 )
+[connection signal="animation_finished" from="Control/fade/fades" to="." method="_on_fades_animation_finished"]

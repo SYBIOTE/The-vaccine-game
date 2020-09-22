@@ -52,7 +52,8 @@ func sight():
 #				print("door detected")
 				hintbar.show_hint("go to work?")
 				if Input.is_action_just_pressed("interact"):
-					Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
+					$Control/fade/fades.play("fade_out")
+					
 				
 			"sanitiser":
 #				print("sanitizer detected")
@@ -80,7 +81,7 @@ func sight():
 			"lab door":
 				hintbar.show_hint("go home?")
 				if Input.is_action_just_pressed("interact"):
-					Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
+					$Control/fade/fades.play("fade_out")
 			"lab computer":
 				hintbar.show_hint("cure progress cure_var%")
 			"testubes":
@@ -116,3 +117,11 @@ func crouch():
 		scale_mult=0
 	if scale.y==.3:
 		scale_mult=0
+
+
+func _on_fades_animation_finished(anim_name):
+	if anim_name =="fade_out":
+		if get_parent().name=="doc_room":
+			Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
+		if get_parent().name=="Labaratory":
+			Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
