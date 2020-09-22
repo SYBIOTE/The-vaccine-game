@@ -19,6 +19,12 @@ func _ready():
 func _process():
 	pass
 
-func calc_totalRisk(infectionRisk, transmissionRisk, cleanliness, health, isWearingMask):
+func calc_totalRisk(infectionRisk, transmissionRisk, cleanliness, health, isWearingMask, totalRisk):
+	totalRisk = (infectionRisk + transmissionRisk - cleanliness - health)/2
+	if isWearingMask:
+		totalRisk *= 0.6
+	else:
+		if totalRisk < 0.9:
+			totalRisk *= 1.5
 
-	pass
+	return totalRisk
