@@ -56,7 +56,14 @@ func sight():
 				hintbar.show_hint("use sanitizer?")
 			"mask":
 #				print("mask detected")
-				hintbar.show_hint("wear mask?")
+				if $cam/mask.visible==false:
+					hintbar.show_hint("wear mask?")
+					if Input.is_action_just_pressed("interact"):
+						$cam/mask.visible=true
+				else:
+					hintbar.show_hint("remove mask?")
+					if Input.is_action_just_pressed("interact"):
+						$cam/mask.visible=false
 			"bed":
 #				print("bed detected")
 				hintbar.show_hint("call it a day?")
