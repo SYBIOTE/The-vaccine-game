@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/ui/dialog_node.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/ui/HintBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://materials/bed_room/red.material" type="Material" id=3]
+
+[sub_resource type="SphereMesh" id=1]
+material = ExtResource( 3 )
+radial_segments = 4
+rings = 4
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -14,4 +20,9 @@ __meta__ = {
 visible = false
 
 [node name="HintBar" parent="." instance=ExtResource( 2 )]
-visible = false
+
+[node name="dot" type="MeshInstance2D" parent="."]
+modulate = Color( 1, 1, 1, 0.545098 )
+position = Vector2( 512, 300 )
+scale = Vector2( 10, 10 )
+mesh = SubResource( 1 )

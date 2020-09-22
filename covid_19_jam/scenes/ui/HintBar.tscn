@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://textures/fonts/Cave-Story.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Square.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/ui/HintBar.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
