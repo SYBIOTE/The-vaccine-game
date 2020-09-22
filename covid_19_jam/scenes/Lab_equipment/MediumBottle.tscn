@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://materials/lab/Glassmaterial.material" type="Material" id=1]
 [ext_resource path="res://materials/lab/Material_001.material" type="Material" id=2]
 [ext_resource path="res://materials/lab/Glass_material.material" type="Material" id=3]
 [ext_resource path="res://materials/lab/black.material" type="Material" id=4]
-
-
-
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -36,6 +33,11 @@ surfaces/1 = {
 "vertex_count": 288
 }
 
+[sub_resource type="CylinderMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.984314, 0.0392157, 0.0392157, 1 )
+
 [node name="MediumBottle" type="Spatial"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 
@@ -44,3 +46,8 @@ transform = Transform( -10, 3.89414e-06, 1.70218e-13, 0, -4.37114e-07, 10, 3.894
 mesh = SubResource( 1 )
 material/0 = ExtResource( 3 )
 material/1 = ExtResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.0898168, 0, 0, 0, -0.0431019, 0, 0, 0, -0.0898168, 0, -0.0390239, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
