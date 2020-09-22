@@ -42,6 +42,7 @@ func usr_input():
 		scale_mult=-1
 	if Input.is_action_just_released("crouch"):
 		scale_mult=+1
+
 func sight():
 	var l_o_s = ray.get_collider()
 	if ray.is_colliding():
@@ -55,13 +56,25 @@ func sight():
 				hintbar.show_hint("use sanitizer?")
 			"mask":
 #				print("mask detected")
-				hintbar.show_hint("wear_mask?")
+				hintbar.show_hint("wear mask?")
 			"bed":
 #				print("bed detected")
 				hintbar.show_hint("call it a day?")
 			"computer":
 #				print("computer detected")
 				hintbar.show_hint("take a leave?")
+			"microscope":
+				hintbar.show_hint("research cure?")
+			"clock":
+				hintbar.show_hint("the time is time_var")
+			"lab door":
+				hintbar.show_hint("go home?")
+			"lab computer":
+				hintbar.show_hint("cure progress cure_var%")
+			"testubes":
+				hintbar.show_hint("change sample?")
+			
+			
 	else:
 		hintbar.reset()
 func _physics_process(delta):
@@ -87,7 +100,7 @@ func _physics_process(delta):
 func crouch():
 	scale.y+=scale_factor*scale_mult
 	scale.y=clamp(scale.y,.3,.6)
-	if scale.y==.75:
+	if scale.y==.6:
 		scale_mult=0
-	if scale.y==.2:
+	if scale.y==.3:
 		scale_mult=0
