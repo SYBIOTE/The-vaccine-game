@@ -53,7 +53,7 @@ func sight():
 				hintbar.show_hint("go to work?")
 				if Input.is_action_just_pressed("interact"):
 					$Control/fade/fades.play("fade_out")
-					
+				
 				
 			"sanitiser":
 #				print("sanitizer detected")
@@ -64,10 +64,12 @@ func sight():
 					hintbar.show_hint("wear mask?")
 					if Input.is_action_just_pressed("interact"):
 						$cam/mask.visible=true
+						$simulator/PlayerData.isWearingMask=true
 				else:
 					hintbar.show_hint("remove mask?")
 					if Input.is_action_just_pressed("interact"):
 						$cam/mask.visible=false
+						$simulator/PlayerData.isWearingMask=false
 			"bed":
 #				print("bed detected")
 				hintbar.show_hint("call it a day?")

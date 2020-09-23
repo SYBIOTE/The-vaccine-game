@@ -9,8 +9,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Calculate Infected" type="Node" parent="."]
+[node name="Calculate " type="Node" parent="."]
 script = ExtResource( 1 )
+use_presets = true
 
 [node name="PlayerData" type="Node" parent="."]
 script = ExtResource( 2 )

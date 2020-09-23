@@ -3,8 +3,9 @@ extends Node
 var random = RandomNumberGenerator.new()
 onready var data = get_parent().get_node("SaveAndLoadData")
 onready var player_data = get_parent().get_node("PlayerData")
-var totalPopulationNum
-var totalInfected
+export var totalPopulationNum : int
+export var totalInfected : int 
+export var use_presets: bool
 var totalHealthy
 
 var infectionRiskPercent
@@ -12,34 +13,26 @@ var percentOfTotalInfected
 
 # This function will do things when this node is is put in the scene
 func _ready():
-
 	print(data.wdata)
 	var world_data = data.wdata
-
-	totalPopulationNum =  20000
-	random.randomize()
-
-	totalInfected = 10
-	totalHealthy = totalPopulationNum - totalInfected
-	
-
-	
-	
-	world_data["totalInfected"] = totalInfected
-	world_data["totalHealthy"] = totalHealthy
-	world_data["totalPopulation"] = totalPopulationNum
-	
-	
-	percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
-	
-	world_data["percentOfTotalInfected"] = percentOfTotalInfected
-	
+	if use_presets:
+		totalPopulationNum =  20000
+		random.randomize()
+		totalInfected = 4
+		totalHealthy = totalPopulationNum - totalInfected
+		world_data["totalInfected"] = totalInfected
+		world_data["totalHealthy"] = totalHealthy
+		world_data["totalPopulation"] = totalPopulationNum
+		percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
+		world_data["percentOfTotalInfected"] = percentOfTotalInfected
+		world_data["infectionRiskPercent"] = player_data.calc_totalRisk(totalInfected)
 	
 	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
 	var i = 0
 	print("initial",world_data)
 	while  i < 10:
 		calculate_ans(world_data)
+		player_data.check_if_infected()
 		if world_data["totalInfected"]==world_data["totalPopulation"]:
 			print("over at iteration",i)
 			break
@@ -70,6 +63,7 @@ func calculate_ans(var world_data):
 		
 		totalInfected = clamp(totalInfected,0,totalPopulationNum)
 		world_data["totalInfected"] = totalInfected
+		world_data["infectionRiskPercent"] = player_data.calc_totalRisk(totalInfected)
 		totalHealthy = clamp(totalHealthy,0,totalPopulationNum)
 		world_data["totalHealthy"] = totalHealthy
 		world_data["totalPopulation"] = totalPopulationNum
@@ -81,3 +75,5 @@ func calculate_ans(var world_data):
 	else:
 		print("all infected")
 
+
+	
