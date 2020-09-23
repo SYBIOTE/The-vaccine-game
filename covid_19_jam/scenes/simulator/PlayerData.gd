@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 var isWearingMask #Wearing a mask is a really important factor in deciding the totalRisk.
 var infectionRisk #The risk of infection, this changes depending upon where the player is and also how clean he is.
@@ -14,8 +14,8 @@ var totalRisk #An accumulation of all the factors like wearing mask, cleanliness
 # also the final deciding factor as to wether the player gets infected or not ( can never be 0 )
 
 
-func calc_totalRisk(infectionRisk, transmissionRisk, cleanliness, health, isWearingMask, totalRisk):
-	totalRisk = (infectionRisk + transmissionRisk - cleanliness - health)/2
+func calc_totalRisk(infectionRisk, transmissionRisk, cleanliness, health, isWearingMask):
+	var totalRisk = (infectionRisk + transmissionRisk - cleanliness - health)/2
 	if isWearingMask:
 		totalRisk *= 0.6
 	else:

@@ -1,8 +1,8 @@
-extends Spatial
+extends Node
 
 var random = RandomNumberGenerator.new()
 onready var data = get_parent().get_node("SaveAndLoadData")
-
+onready var player_data = get_parent().get_node("PlayerData")
 var totalPopulationNum
 var totalInfected
 var totalHealthy

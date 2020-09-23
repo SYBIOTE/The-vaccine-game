@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 var save_pdata = "user://save_pdata.dat"
 var save_wdata = "user://save_wdata.dat"
