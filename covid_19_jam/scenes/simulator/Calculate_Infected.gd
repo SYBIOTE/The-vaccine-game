@@ -16,43 +16,68 @@ func _ready():
 	print(data.wdata)
 	var world_data = data.wdata
 
-	totalPopulationNum = 250
+	totalPopulationNum =  20000
 	random.randomize()
 
 	totalInfected = 10
-	totalHealthy = 0
-
-	totalInfected *= 100
-	percentOfTotalInfected = totalInfected/totalPopulationNum
-	totalInfected /= 100
-
-	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
-
-	calculate_ans(world_data)
-	calculate_ans(world_data)
-
-func calculate_ans(var world_data):
-	var i = 0
-	while i < totalPopulationNum:
-		var infectionRoll = random.randi_range(1,101)
-		#print(str(i) + ": " + "infectionRoll: " + str(infectionRoll) + " ; percentOfTotalInfected: " + str(percentOfTotalInfected))
-
-		if infectionRoll < percentOfTotalInfected:
-			totalInfected += 1
-
-		i += 1
-
-	totalInfected *= 100
-	percentOfTotalInfected = totalInfected/totalPopulationNum
-	totalInfected /= 100
-
 	totalHealthy = totalPopulationNum - totalInfected
+	
 
-	print("percentOfTotalInfected: " + str(percentOfTotalInfected))
-	world_data["percentOfTotalInfected"] = percentOfTotalInfected
+	
+	
 	world_data["totalInfected"] = totalInfected
 	world_data["totalHealthy"] = totalHealthy
 	world_data["totalPopulation"] = totalPopulationNum
+	
+	
+	percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
+	
+	world_data["percentOfTotalInfected"] = percentOfTotalInfected
+	
+	
+	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
+	var i = 0
+	print("initial",world_data)
+	while  i < 10:
+		calculate_ans(world_data)
+		if world_data["totalInfected"]==world_data["totalPopulation"]:
+			print("over at iteration",i)
+			break
+		i += 1
+	print("final",world_data)
+	
+func calculate_ans(var world_data):
+	var i = 0
+	if world_data["totalInfected"]<world_data["totalPopulation"]:
+		
+		
+		while i < totalPopulationNum:
+			var infectionRoll = rand_range(0,101)
+			#print(str(i) + ": " + "infectionRoll: " + str(infectionRoll) + " ; percentOfTotalInfected: " + str(percentOfTotalInfected))
 
-	data.save_data(world_data, data.save_wdata)
-	print(world_data)
+			if infectionRoll < percentOfTotalInfected:
+				totalInfected += 1
+
+			i += 1
+
+		
+
+		totalHealthy = totalPopulationNum - totalInfected
+		
+	#	print("percentOfTotalInfected: " + str(percentOfTotalInfected))
+		
+		
+		
+		totalInfected = clamp(totalInfected,0,totalPopulationNum)
+		world_data["totalInfected"] = totalInfected
+		totalHealthy = clamp(totalHealthy,0,totalPopulationNum)
+		world_data["totalHealthy"] = totalHealthy
+		world_data["totalPopulation"] = totalPopulationNum
+		percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
+		percentOfTotalInfected = clamp(percentOfTotalInfected,0,100)
+		world_data["percentOfTotalInfected"] = float(percentOfTotalInfected)
+		
+		data.save_data(world_data, data.save_wdata)
+	else:
+		print("all infected")
+
