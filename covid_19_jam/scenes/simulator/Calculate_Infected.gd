@@ -13,7 +13,7 @@ var percentOfTotalInfected
 
 # This function will do things when this node is is put in the scene
 func _ready():
-	print(data.wdata)
+	#print(data.wdata)
 	var world_data = data.wdata
 	if use_presets:
 		#world
