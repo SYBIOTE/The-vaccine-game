@@ -55,8 +55,9 @@ func sight():
 				
 				
 			"sanitiser":
-#				print("sanitizer detected")
 				hintbar.show_hint("use sanitizer?")
+				if Input.is_action_just_pressed("interact"):
+					SimulationEngine.get_node("PlayerData").cleanliness+=.2
 			"mask":
 				print("mask detected")
 				if $cam/mask.visible==false:

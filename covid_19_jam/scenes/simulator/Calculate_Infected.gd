@@ -16,7 +16,7 @@ func _ready():
 	print(data.wdata)
 	var world_data = data.wdata
 	if use_presets:
-		totalPopulationNum =  20000
+		totalPopulationNum =  1000000
 		random.randomize()
 		totalInfected = 4
 		totalHealthy = totalPopulationNum - totalInfected
