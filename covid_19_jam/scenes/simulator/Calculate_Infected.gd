@@ -16,8 +16,8 @@ func _ready():
 	print(data.wdata)
 	var world_data = data.wdata
 	if use_presets:
+		#world
 		totalPopulationNum =  1000000
-		random.randomize()
 		totalInfected = 4
 		totalHealthy = totalPopulationNum - totalInfected
 		world_data["totalInfected"] = totalInfected
@@ -43,6 +43,7 @@ func calculate_ans(world_data):
 	var i = 0
 	if world_data["totalInfected"]<world_data["totalPopulation"]:
 		
+		random.randomize()
 		
 		while i < totalPopulationNum:
 			var infectionRoll = rand_range(0,101)

@@ -40,10 +40,13 @@ __meta__ = {
 
 [node name="play" type="Button" parent="."]
 light_mask = -2147483647
-margin_left = 326.0
-margin_top = 240.0
-margin_right = 724.0
-margin_bottom = 351.0
+anchor_left = 0.318
+anchor_top = 0.4
+anchor_right = 0.707
+anchor_bottom = 0.585
+margin_left = 0.367981
+margin_right = 0.0319824
+margin_bottom = -3.05176e-05
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Play"
@@ -53,10 +56,14 @@ __meta__ = {
 }
 
 [node name="quit" type="Button" parent="."]
-margin_left = 326.0
-margin_top = 424.0
-margin_right = 724.0
-margin_bottom = 535.0
+anchor_left = 0.318
+anchor_top = 0.707
+anchor_right = 0.707
+anchor_bottom = 0.892
+margin_left = 0.367981
+margin_top = -0.200012
+margin_right = 0.0319824
+margin_bottom = -0.200012
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Quit"

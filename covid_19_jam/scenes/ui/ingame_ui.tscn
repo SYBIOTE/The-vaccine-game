@@ -1,28 +1,30 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/ui/dialog_node.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/dot_PNG39.png" type="Texture" id=1]
 [ext_resource path="res://scenes/ui/HintBar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://materials/bed_room/red.material" type="Material" id=3]
-
-[sub_resource type="SphereMesh" id=1]
-material = ExtResource( 3 )
-radial_segments = 4
-rings = 4
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="dialog" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="HintBar" parent="." instance=ExtResource( 2 )]
 
-[node name="dot" type="MeshInstance2D" parent="."]
-modulate = Color( 1, 1, 1, 0.545098 )
-position = Vector2( 512, 300 )
-scale = Vector2( 10, 10 )
-mesh = SubResource( 1 )
+[node name="HintBar2" parent="." instance=ExtResource( 2 )]
+margin_top = -46.0
+margin_bottom = -46.0
+
+[node name="dot" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.768627 )
+anchor_left = 0.472
+anchor_top = 0.452
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -0.128021
+margin_right = 547.2
+margin_bottom = 547.2
+rect_scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 1 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}

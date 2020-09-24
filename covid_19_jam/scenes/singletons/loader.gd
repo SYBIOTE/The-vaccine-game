@@ -63,6 +63,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		set_process(true)
 		calc_show_data()
 	if delay:
+		
 		get_node("/root").add_child(current_scene)
 
 func _on_Timer_timeout():
@@ -72,6 +73,12 @@ func _on_Timer_timeout():
 func calc_show_data():
 	var data=SimulationEngine.get_node("SaveAndLoadData").load_wdata()
 	print(data)
+	var string
 	SimulationEngine.get_node("Calc").calculate_ans(data)
-	var string="total population: "+str(data["totalPopulation"])+"\ninfected: "+str(data["totalInfected"])+"\nhealty: "+str(data["totalHealthy"])+"\n\n risk: "+str(data["infectionRiskPercent"]) +"%"
+	if SimulationEngine.get_node("PlayerData").workdone==SimulationEngine.get_node("PlayerData").workLoad:
+		string="cure finished \n you win"
+	elif SimulationEngine.get_node("PlayerData").check_if_infected():
+		string="your infected \n game over"
+	else:
+		string="total population: "+str(data["totalPopulation"])+"\ninfected: "+str(data["totalInfected"])+"\nhealty: "+str(data["totalHealthy"])+"\n\n risk: "+str(data["infectionRiskPercent"]) +"%"
 	$background/loading.text=string

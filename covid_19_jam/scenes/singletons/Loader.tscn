@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/singletons/loader.gd" type="Script" id=1]
 [ext_resource path="res://Square.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=2]
@@ -20,36 +20,24 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("background/logo:modulate")
+tracks/1/path = NodePath("background/loading:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.71, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("background/loading:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.7, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
@@ -57,50 +45,39 @@ tracks/3/keys = {
 }
 
 [node name="Loader" type="Control"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1024.0
-margin_bottom = -600.0
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="background" type="ColorRect" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="logo" type="TextureRect" parent="background"]
-anchor_left = 0.008
-anchor_right = 0.223
-anchor_bottom = 0.137
-margin_left = -0.192
-margin_right = 1418.65
-margin_bottom = 517.8
-rect_scale = Vector2( 0.134195, 0.137269 )
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="loading" type="Label" parent="background"]
-anchor_left = 0.147
-anchor_top = 0.128
-anchor_right = 0.892
-anchor_bottom = 0.86
-margin_left = 0.472
-margin_top = 0.199997
-margin_right = -531.408
-margin_bottom = -301.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -511.0
+margin_top = -300.0
+margin_right = -201.0
+margin_bottom = -111.0
 rect_scale = Vector2( 3.301, 3.18 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "
+"
 align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
