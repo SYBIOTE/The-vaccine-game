@@ -21,7 +21,7 @@ var move_vec=Vector3(0, 0, 0)
 func _input(event):
 	if event is InputEventMouseMotion:
 		cam.rotation_degrees.x -= event.relative.y * V_look_sens
-		cam.rotation_degrees.x =clamp(cam.rotation_degrees.x,-50,90)
+		cam.rotation_degrees.x =clamp(cam.rotation_degrees.x,-55,90)
 		rotation_degrees.y -= event.relative.x * M_LOOK_SENS
 #		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
@@ -42,7 +42,6 @@ func usr_input():
 		scale_mult=-1
 	if Input.is_action_just_released("crouch"):
 		scale_mult=+1
-
 func sight():
 	var l_o_s = ray.get_collider()
 	if ray.is_colliding():
@@ -59,17 +58,18 @@ func sight():
 #				print("sanitizer detected")
 				hintbar.show_hint("use sanitizer?")
 			"mask":
-#				print("mask detected")
+				print("mask detected")
 				if $cam/mask.visible==false:
 					hintbar.show_hint("wear mask?")
 					if Input.is_action_just_pressed("interact"):
 						$cam/mask.visible=true
-						$simulator/PlayerData.isWearingMask=true
+						SimulationEngine.get_node("PlayerData").isWearingMask=true
 				else:
 					hintbar.show_hint("remove mask?")
 					if Input.is_action_just_pressed("interact"):
+						print("no")
 						$cam/mask.visible=false
-						$simulator/PlayerData.isWearingMask=false
+						SimulationEngine.get_node("PlayerData").isWearingMask=false
 			"bed":
 #				print("bed detected")
 				hintbar.show_hint("call it a day?")

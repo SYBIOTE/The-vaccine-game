@@ -26,20 +26,20 @@ func _ready():
 		percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
 		world_data["percentOfTotalInfected"] = percentOfTotalInfected
 		world_data["infectionRiskPercent"] = player_data.calc_totalRisk(totalInfected)
+		data.save_data(world_data, data.save_wdata)
+#	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
+#	var i = 0
+#	print("initial",world_data)
+#	while  i < 10:
+#		calculate_ans(world_data)
+#		player_data.check_if_infected()
+#		if world_data["totalInfected"]==world_data["totalPopulation"]:
+#			print("over at iteration",i)
+#			break
+#		i += 1
+#	print("final",world_data)
 	
-	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
-	var i = 0
-	print("initial",world_data)
-	while  i < 10:
-		calculate_ans(world_data)
-		player_data.check_if_infected()
-		if world_data["totalInfected"]==world_data["totalPopulation"]:
-			print("over at iteration",i)
-			break
-		i += 1
-	print("final",world_data)
-	
-func calculate_ans(var world_data):
+func calculate_ans(world_data):
 	var i = 0
 	if world_data["totalInfected"]<world_data["totalPopulation"]:
 		

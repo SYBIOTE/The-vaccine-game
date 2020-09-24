@@ -14,8 +14,6 @@ func _ready():
 	
 
 func goto_scene(path): # game requests to switch to this scene
-#	check_combat(current_scene.filename,"from")
-#	check_combat(path,"to")
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null: # check for errors
 		print("error")
@@ -53,13 +51,6 @@ func _process(time):
 			print("error")
 			loader = null
 			break
-#func update_progress():
-#	var progress = float(loader.get_stage()) / loader.get_stage_count()
-#	get_node("progress").set_progress(progress)
-#
-#	var length = get_node("animation").get_current_animation_length()
-#
-#	get_node("animation").seek(progress * length, true)
 var delay=false
 func set_new_scene(scene_resource):
 	timer.start()
@@ -70,6 +61,7 @@ func set_new_scene(scene_resource):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "fade"==anim_name:
 		set_process(true)
+		calc_show_data()
 	if delay:
 		get_node("/root").add_child(current_scene)
 
@@ -77,17 +69,9 @@ func _on_Timer_timeout():
 	delay=true
 	anim.play_backwards("fade")
 
-#func check_combat(sc,key):
-#	print(sc)
-#	if sc == "res://scenes/game/combat/CombatScene.tscn":
-#
-#		if key =="to":
-#			print("going to combat")
-#			GlobalLocation.set_scene(current_scene.filename)
-#		if key == "from":
-#			print("coming from combat")
-#			GlobalLocation.coming_from_encounter=true
-#		else:
-#			GlobalLocation.coming_from_encounter=false
-		
-
+func calc_show_data():
+	var data=SimulationEngine.get_node("SaveAndLoadData").load_wdata()
+	print(data)
+	SimulationEngine.get_node("Calc").calculate_ans(data)
+	var string="total population: "+str(data["totalPopulation"])+"\ninfected: "+str(data["totalInfected"])+"\nhealty: "+str(data["totalHealthy"])+"\n\n risk: "+str(data["infectionRiskPercent"]) +"%"
+	$background/loading.text=string

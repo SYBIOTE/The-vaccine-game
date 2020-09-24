@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/singletons/loader.gd" type="Script" id=1]
-[ext_resource path="res://textures/fonts/Cave-Story.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Square.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 3 )
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=2]
 tracks/0/type = "value"
@@ -57,6 +57,7 @@ tracks/3/keys = {
 }
 
 [node name="Loader" type="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1024.0
@@ -69,13 +70,12 @@ __meta__ = {
 [node name="background" type="ColorRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="logo" type="TextureRect" parent="background"]
-modulate = Color( 0, 0, 0, 0 )
 anchor_left = 0.008
 anchor_right = 0.223
 anchor_bottom = 0.137
@@ -88,23 +88,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="loading" type="RichTextLabel" parent="background"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.789
-anchor_top = 0.867
-anchor_right = 1.066
-anchor_bottom = 1.031
-margin_left = 0.0639648
-margin_top = -0.200012
-margin_right = -197.584
-margin_bottom = -67.6
+[node name="loading" type="Label" parent="background"]
+anchor_left = 0.147
+anchor_top = 0.128
+anchor_right = 0.892
+anchor_bottom = 0.86
+margin_left = 0.472
+margin_top = 0.199997
+margin_right = -531.408
+margin_bottom = -301.0
 rect_scale = Vector2( 3.301, 3.18 )
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[tornado radius=2 freq=2] 
-  Loading..."
-text = " 
-  Loading..."
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
