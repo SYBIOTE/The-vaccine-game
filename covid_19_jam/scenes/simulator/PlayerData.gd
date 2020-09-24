@@ -6,7 +6,7 @@ var transmissionRisk =.05#The risk of the disease betting transmitted from one p
 var cleanliness=0 #How clean the player keeps itself, more the better. but too much is harmful to health
 var workLoad #The amount of work the player does, needed to make the vaccine, but too much and health declines.
 # too less and the player gets kicked and dies of poor health as he/she becomes is unemployed and homeless.
-var Interaction_chance =.003 #This is the amount of interaction the player has with other people
+var Interaction_chance =.001 #This is the amount of interaction the player has with other people
 # some notes to be taken , 
 #higher total population, means u know interact with less people(compared to total)
 # so low interaction chance
@@ -25,6 +25,8 @@ func calc_totalRisk(infected):
 	if isWearingMask:
 		totalRisk *= 0.6
 	print("total risk", totalRisk)
+	totalRisk=clamp(totalRisk,0,100)
+	
 	return totalRisk*100
 
 func check_if_infected():
