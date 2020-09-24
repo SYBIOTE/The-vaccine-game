@@ -104,7 +104,7 @@ func sight():
 				if Input.is_action_just_pressed("interact"):
 					$Control/fade/fades.play("fade_out")
 			"lab computer":
-				hintbar.show_hint("cure progress"+str(SimulationEngine.get_node("PlayerData").workLoad*10))
+				hintbar.show_hint("cure progress : "+str(SimulationEngine.get_node("PlayerData").workdone*10)+"%")
 			"testubes":
 				hintbar.show_hint("change sample?")
 				#by changing samples possibility for next work to give double result

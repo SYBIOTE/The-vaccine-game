@@ -60,10 +60,9 @@ func set_new_scene(scene_resource):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if "fade"==anim_name:
-		set_process(true)
 		calc_show_data()
+		set_process(true)
 	if delay:
-		
 		get_node("/root").add_child(current_scene)
 
 func _on_Timer_timeout():
@@ -77,8 +76,13 @@ func calc_show_data():
 	SimulationEngine.get_node("Calc").calculate_ans(data)
 	if SimulationEngine.get_node("PlayerData").workdone==SimulationEngine.get_node("PlayerData").workLoad:
 		string="cure finished \n you win"
+		loader=ResourceLoader.load_interactive("res://scenes/ui/title.tscn")
 	elif SimulationEngine.get_node("PlayerData").check_if_infected():
 		string="your infected \n game over"
+		loader=ResourceLoader.load_interactive("res://scenes/ui/title.tscn")
 	else:
 		string="total population: "+str(data["totalPopulation"])+"\ninfected: "+str(data["totalInfected"])+"\nhealty: "+str(data["totalHealthy"])+"\n\n risk: "+str(data["infectionRiskPercent"]) +"%"
 	$background/loading.text=string
+
+
+
