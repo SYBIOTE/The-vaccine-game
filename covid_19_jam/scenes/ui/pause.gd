@@ -9,6 +9,7 @@ func _process(delta: float) -> void:
 func pausing():
 	#pause = not pause
 	get_tree().paused = pause
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_node(".").set_visible(pause)
 
 
@@ -26,4 +27,5 @@ func _on_quit_pressed() -> void:
 
 func _on_resume_pressed() -> void:
 	get_tree().paused = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	get_node(".").set_visible(false)

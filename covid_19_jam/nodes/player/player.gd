@@ -1,5 +1,5 @@
 extends KinematicBody
-export var MOVE_SPEED=3
+export var MOVE_SPEED=4
 const JUMP_FORCE=30
 const gravity=.98
 const max_fall_speed=30
@@ -21,6 +21,8 @@ func _ready():
 	var pdata=SimulationEngine.get_node("PlayerData")
 	if pdata.isWearingMask:
 		$cam/mask.show()
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -95,7 +97,7 @@ func sight():
 				hintbar.show_hint("research cure?")
 				if Input.is_action_just_pressed("interact"):
 					SimulationEngine.get_node("PlayerData").health-=.05
-					SimulationEngine.get_node("PlayerData").workdone+=1
+					SimulationEngine.get_node("PlayerData").workdone+=0.1
 					statsbar.show_hint("cure progressed")
 			"clock":
 				hintbar.show_hint("the time is time_var")
