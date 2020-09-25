@@ -87,6 +87,7 @@ func sight():
 				if Input.is_action_just_pressed("interact"):
 					SimulationEngine.get_node("PlayerData").health+=.1
 					new_day()
+					Loader.calc_show_data()
 					statsbar.show_hint("health recovered")
 			"computer":
 #				print("computer detected")
