@@ -4,12 +4,15 @@ extends Spatial
 export var current_time = 0
 
 var data = SimulationEngine.get_node("SaveAndLoadData")
+var world_data = data.wdata
 
 func save_time():
-	var world_data = data.wdata
 	world_data["currentTime"] = current_time
-	print(current_time)
 	data.save_wdata
+	print(current_time)
+	if current_time	in [1, 5, 12, 19, 23]:
+		SimulationEngine.get_node("Calc").calculate_ans(world_data)
+		print(world_data)
 
 
 func _on_Timer_timeout():
