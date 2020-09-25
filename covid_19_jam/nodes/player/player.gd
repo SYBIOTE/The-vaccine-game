@@ -86,6 +86,7 @@ func sight():
 				hintbar.show_hint("call it a day?")
 				if Input.is_action_just_pressed("interact"):
 					SimulationEngine.get_node("PlayerData").health+=.1
+					new_day()
 					statsbar.show_hint("health recovered")
 			"computer":
 #				print("computer detected")
@@ -93,6 +94,7 @@ func sight():
 				if Input.is_action_just_pressed("interact"):
 					SimulationEngine.get_node("PlayerData").health+=.3
 					statsbar.show_hint("health recovered")
+					new_day()
 			"microscope":
 				hintbar.show_hint("research cure?")
 				if Input.is_action_just_pressed("interact"):
@@ -144,6 +146,11 @@ func crouch():
 	if scale.y==.3:
 		scale_mult=0
 
+var i=1
+func new_day():
+	$Control/fade/fades.play("new_day")
+	$Control/fade/text.text="Day"+str(2)
+	i+=1
 
 func _on_fades_animation_finished(anim_name):
 	if anim_name =="fade_out":
@@ -155,3 +162,4 @@ func _on_fades_animation_finished(anim_name):
 
 func _on_sanitizer_cooldown_timeout():
 	sanitizer_use=true
+
