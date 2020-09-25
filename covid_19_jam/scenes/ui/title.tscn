@@ -23,6 +23,10 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="ColorRect"]
 anchor_right = 0.999
@@ -30,7 +34,7 @@ anchor_bottom = 0.367
 margin_right = 0.0239258
 margin_bottom = 0.166992
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0.992157, 0.301961, 0.301961, 1 )
 text = "The Vaccine"
 align = 1
 valign = 1
@@ -39,7 +43,6 @@ __meta__ = {
 }
 
 [node name="play" type="Button" parent="."]
-light_mask = -2147483647
 anchor_left = 0.318
 anchor_top = 0.4
 anchor_right = 0.707
@@ -48,7 +51,7 @@ margin_left = 0.367981
 margin_right = 0.0319824
 margin_bottom = -3.05176e-05
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Play"
 flat = true
 __meta__ = {
@@ -65,7 +68,7 @@ margin_top = -0.200012
 margin_right = 0.0319824
 margin_bottom = -0.200012
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Quit"
 flat = true
 __meta__ = {
