@@ -22,6 +22,7 @@ var totalRisk #An accumulation of all the factors like wearing mask, cleanliness
 
 func calc_totalRisk(infected):
 	infectionRisk=infected*Interaction_chance*transmissionRisk
+	health=clamp(health,.1,5)
 	totalRisk = (infectionRisk)/(health+cleanliness)
 	if isWearingMask:
 		totalRisk *= 0.6

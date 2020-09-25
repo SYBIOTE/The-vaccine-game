@@ -22,14 +22,14 @@ func _ready():
 	if pdata.isWearingMask:
 		$cam/mask.show()
 	
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		cam.rotation_degrees.x -= event.relative.y * V_look_sens
 		cam.rotation_degrees.x =clamp(cam.rotation_degrees.x,-65,90)
 		rotation_degrees.y -= event.relative.x * M_LOOK_SENS
-#		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 
 func usr_input():
