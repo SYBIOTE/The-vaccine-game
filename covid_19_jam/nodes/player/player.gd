@@ -17,7 +17,12 @@ onready var statsbar=$Control/HintBar2
 var move_vec=Vector3(0, 0, 0)
 
 
+var random = RandomNumberGenerator.new()
+
 func _ready():
+
+	random.randomize()
+
 	var pdata=SimulationEngine.get_node("PlayerData")
 	if pdata.isWearingMask:
 		$cam/mask.show()
@@ -112,6 +117,12 @@ func sight():
 				hintbar.show_hint("cure progress : "+str(SimulationEngine.get_node("PlayerData").workdone*10)+"%")
 			"testubes":
 				hintbar.show_hint("change sample?")
+				var x = rand_range(1, 10)
+				if x > 7:
+					SimulationEngine.get_node("PlayerData").workdone += 0.5
+				elif x < 4:
+					if SimulationEngine.get_node("PlayerData").workdone > 0:
+						SimulationEngine.get_node("PlayerData").workdone -= 0.2
 				#by changing samples possibility for next work to give double result
 			"StaticBody":
 				hintbar.reset()

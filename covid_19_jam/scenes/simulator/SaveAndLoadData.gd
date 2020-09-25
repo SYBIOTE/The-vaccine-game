@@ -23,6 +23,7 @@ export var wdata = {
 		"totalHealthy" : 0,
 		"infectionRiskPercent" : 0,
 		"percentOfTotalInfected" : 0,
+		"currentTime" : 0,
 	}
 
 func save_data(var dt = null, var path = null):
