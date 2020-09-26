@@ -75,6 +75,7 @@ func sight():
 					statsbar.show_hint("used sanitizer,risk lowered , use again in a while")
 				if Input.is_action_just_pressed("interact"):
 					sanitizer_use=false
+					$sanitizer_cooldown.start()
 					SimulationEngine.get_node("PlayerData").cleanliness+=.15
 			"mask":
 				print("mask detected")
