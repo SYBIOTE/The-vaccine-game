@@ -4,6 +4,7 @@ extends Node
 var wake_up=6
 var travel_time=2
 var work_time=1
+var ch_sample_time=2
 var current_time 
 var current_day=1
 onready var data = get_parent().get_node("SaveAndLoadData")
@@ -29,6 +30,9 @@ func new_day():
 	save_time()
 func work():
 	current_time+=work_time
+	save_time()
+func ch_sample():
+	current_time+=ch_sample_time
 	save_time()
 func _on_Timer_timeout():
 	if current_time == 24:

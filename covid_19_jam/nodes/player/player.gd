@@ -1,4 +1,7 @@
 extends KinematicBody
+
+
+
 export var MOVE_SPEED=4
 const JUMP_FORCE=30
 const gravity=.98
@@ -6,6 +9,7 @@ const max_fall_speed=30
 const M_LOOK_SENS=0.5
 const V_look_sens=1
 onready var y_vel=0
+var working=false
 var jumped
 var scale_factor=.03
 var scale_mult=0
@@ -120,6 +124,8 @@ func sight():
 						SimulationEngine.get_node("PlayerData").workdone+=0.1
 						SimulationEngine.get_node("Time_system").work()
 						statsbar.show_hint("cure progressed")
+						$Control/fade/fades.play("fade_out")
+						working = true
 				else:
 					statsbar.show_hint("too late to work")
 			"clock":
@@ -138,14 +144,24 @@ func sight():
 				hintbar.show_hint("cure progress : "+str(SimulationEngine.get_node("PlayerData").workdone*10)+"%")
 			"testubes":
 				hintbar.show_hint("change sample?")
-				if Input.is_action_just_pressed("interact"):
-					var x = rand_range(1, 10)
-					if x > 7:
-						SimulationEngine.get_node("PlayerData").workdone += 0.5
-					elif x < 4:
-						if SimulationEngine.get_node("PlayerData").workdone > 0:
-							SimulationEngine.get_node("PlayerData").workdone -= 0.2
-					statsbar.show_hint("samples changed")
+				if SimulationEngine.get_node("Time_system").current_time<20:
+					if Input.is_action_just_pressed("interact"):
+						var x = rand_range(1, 10)
+						if x > 7:
+							SimulationEngine.get_node("PlayerData").workdone += 0.5
+						elif x < 4:
+							if SimulationEngine.get_node("PlayerData").workdone > 0:
+								SimulationEngine.get_node("PlayerData").workdone -= 0.2
+								SimulationEngine.get_node("Time_system").ch_sample()
+								statsbar.show_hint("samples changed")
+								$Control/fade/fades.play("fade_out")
+								working = true
+							else:
+								pass
+						else:
+							pass
+				else:
+					statsbar.show_hint("Too late to work.")
 				#by changing samples possibility for next work to give double result
 			"StaticBody":
 				hintbar.reset()
@@ -188,11 +204,15 @@ func new_day():
 
 func _on_fades_animation_finished(anim_name):
 	if anim_name =="fade_out":
-		if get_parent().name=="doc_room":
-			Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
-			SimulationEngine.get_node("PlayerData").gone_to_work=true
-		if get_parent().name=="Laboratory":
-			Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
+		if !working:
+			if get_parent().name=="doc_room":
+				Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
+				SimulationEngine.get_node("PlayerData").gone_to_work=true
+			elif get_parent().name=="Laboratory":
+				Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
+		else:
+			$Control/fade/fades.play("fade_in")
+			working = false
 
 
 func _on_sanitizer_cooldown_timeout():
