@@ -7,7 +7,8 @@ var cleanliness=0 #How clean the player keeps itself, more the better. but too m
 var workLoad=10#The amount of work the player does, needed to make the vaccine, but too much and health declines.
 # too less and the player gets kicked and dies of poor health as he/she becomes is unemployed and homeless.
 var workdone=0 # the work done to finish cure
-var Interaction_chance =.0001 #This is the amount of interaction the player has with other people
+var Interaction_chance =.0003 #This is the amount of interaction the player has with other people
+var gone_to_work=false
 # some notes to be taken , 
 #higher total population, means u know interact with less people(compared to total)
 # so low interaction chance

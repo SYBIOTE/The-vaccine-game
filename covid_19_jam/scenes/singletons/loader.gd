@@ -73,7 +73,7 @@ func calc_show_data():
 	var data=SimulationEngine.get_node("SaveAndLoadData").load_wdata()
 	print(data)
 	var string
-	SimulationEngine.get_node("Calc").calculate_ans(data)
+#	SimulationEngine.get_node("Calc").calculate_ans(data)
 	if SimulationEngine.get_node("PlayerData").workdone==SimulationEngine.get_node("PlayerData").workLoad:
 		string="cure finished \n you win"
 		loader=ResourceLoader.load_interactive("res://scenes/ui/title.tscn")

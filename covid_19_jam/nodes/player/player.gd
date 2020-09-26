@@ -61,10 +61,13 @@ func sight():
 			"door":
 #				print("door detected")
 				hintbar.show_hint("go to work?")
-				if Input.is_action_just_pressed("interact"):
-					$Control/fade/fades.play("fade_out")
-				
-				
+				if !SimulationEngine.get_node("PlayerData").gone_to_work:
+					if Input.is_action_just_pressed("interact"):
+						$Control/fade/fades.play("fade_out")
+						SimulationEngine.get_node("Time_system").travel()
+						
+				else:
+					statsbar.show_hint("already worked today")
 			"sanitiser":
 				if sanitizer_use:
 					hintbar.show_hint("use sanitizer?")
@@ -89,40 +92,59 @@ func sight():
 			"bed":
 #				print("bed detected")
 				hintbar.show_hint("call it a day?")
-				if Input.is_action_just_pressed("interact"):
-					SimulationEngine.get_node("PlayerData").health+=.1
-					new_day()
-					Loader.calc_show_data()
-					statsbar.show_hint("health recovered")
+				if SimulationEngine.get_node("Time_system").current_time>18 and  SimulationEngine.get_node("PlayerData").gone_to_work:
+				
+					if Input.is_action_just_pressed("interact"):
+						SimulationEngine.get_node("PlayerData").health+=.1
+						new_day()
+						Loader.calc_show_data()
+						statsbar.show_hint("health recovered")
+				else:
+					statsbar.show_hint("too early to go to sleep")
 			"computer":
 #				print("computer detected")
 				hintbar.show_hint("take a leave?")
-				if Input.is_action_just_pressed("interact"):
-					SimulationEngine.get_node("PlayerData").health+=.3
-					statsbar.show_hint("health recovered")
-					new_day()
+				if SimulationEngine.get_node("Time_system").current_time<11:
+					if Input.is_action_just_pressed("interact"):
+						SimulationEngine.get_node("PlayerData").health+=.3
+						statsbar.show_hint("health recovered")
+						new_day()
+				else:
+					statsbar.show_hint("too late to send a leave application for today")
 			"microscope":
 				hintbar.show_hint("research cure?")
-				if Input.is_action_just_pressed("interact"):
-					SimulationEngine.get_node("PlayerData").health-=.05
-					SimulationEngine.get_node("PlayerData").workdone+=0.1
-					statsbar.show_hint("cure progressed")
+				if SimulationEngine.get_node("Time_system").current_time<20:
+					if Input.is_action_just_pressed("interact"):
+						SimulationEngine.get_node("PlayerData").health-=.05
+						SimulationEngine.get_node("PlayerData").workdone+=0.1
+						SimulationEngine.get_node("Time_system").work()
+						statsbar.show_hint("cure progressed")
+				else:
+					statsbar.show_hint("too late to work")
 			"clock":
-				hintbar.show_hint("the time is time_var")
+				var hour = SimulationEngine.get_node("Time_system").current_time
+				var minutes = SimulationEngine.get_node("Time_system/Timer").time_left*2
+				hintbar.show_hint("the time is "+ str(hour)+":"+str(int(60-minutes)) )
 			"lab door":
 				hintbar.show_hint("go home?")
-				if Input.is_action_just_pressed("interact"):
-					$Control/fade/fades.play("fade_out")
+				if SimulationEngine.get_node("Time_system").current_time>=18:
+					if Input.is_action_just_pressed("interact"):
+						$Control/fade/fades.play("fade_out")
+						SimulationEngine.get_node("Time_system").travel()
+				else:
+					statsbar.show_hint("cant leave before 6pm")
 			"lab computer":
 				hintbar.show_hint("cure progress : "+str(SimulationEngine.get_node("PlayerData").workdone*10)+"%")
 			"testubes":
 				hintbar.show_hint("change sample?")
-				var x = rand_range(1, 10)
-				if x > 7:
-					SimulationEngine.get_node("PlayerData").workdone += 0.5
-				elif x < 4:
-					if SimulationEngine.get_node("PlayerData").workdone > 0:
-						SimulationEngine.get_node("PlayerData").workdone -= 0.2
+				if Input.is_action_just_pressed("interact"):
+					var x = rand_range(1, 10)
+					if x > 7:
+						SimulationEngine.get_node("PlayerData").workdone += 0.5
+					elif x < 4:
+						if SimulationEngine.get_node("PlayerData").workdone > 0:
+							SimulationEngine.get_node("PlayerData").workdone -= 0.2
+					statsbar.show_hint("samples changed")
 				#by changing samples possibility for next work to give double result
 			"StaticBody":
 				hintbar.reset()
@@ -141,7 +163,6 @@ func _physics_process(delta):
 	move_vec.y = y_vel
 	move_and_slide(move_vec,Vector3(0,1,0))
 	sight()
-	
 #	var grounded = is_on_floor()
 #	if !grounded:
 #		y_vel-=gravity
@@ -158,20 +179,22 @@ func crouch():
 	if scale.y==.3:
 		scale_mult=0
 
-var i=1
 func new_day():
 	$Control/fade/fades.play("new_day")
-	$Control/fade/text.text="Day"+str(2)
-	i+=1
+	SimulationEngine.get_node("Time_system").new_day()
+	SimulationEngine.get_node("PlayerData").gone_to_work=false
+	$Control/fade/text.text="Day "+str(SimulationEngine.get_node("Time_system").current_day)
 
 func _on_fades_animation_finished(anim_name):
 	if anim_name =="fade_out":
 		if get_parent().name=="doc_room":
 			Loader.goto_scene("res://scenes/map/indoors/lab.tscn")
+			SimulationEngine.get_node("PlayerData").gone_to_work=true
 		if get_parent().name=="Laboratory":
 			Loader.goto_scene("res://scenes/map/indoors/bed_room.tscn")
 
 
 func _on_sanitizer_cooldown_timeout():
 	sanitizer_use=true
+
 
