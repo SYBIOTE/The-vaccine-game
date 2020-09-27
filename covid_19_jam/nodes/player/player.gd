@@ -125,6 +125,7 @@ func sight():
 						SimulationEngine.get_node("Time_system").work()
 						statsbar.show_hint("cure progressed")
 						$Control/fade/fades.play("fade_out")
+						$Control/fade/text.text="1 hour later"
 						working = true
 				else:
 					statsbar.show_hint("too late to work")
@@ -149,17 +150,13 @@ func sight():
 						var x = rand_range(1, 10)
 						if x > 7:
 							SimulationEngine.get_node("PlayerData").workdone += 0.5
-						elif x < 4:
-							if SimulationEngine.get_node("PlayerData").workdone > 0:
-								SimulationEngine.get_node("PlayerData").workdone -= 0.2
-								SimulationEngine.get_node("Time_system").ch_sample()
-								statsbar.show_hint("samples changed")
-								$Control/fade/fades.play("fade_out")
-								working = true
-							else:
-								pass
-						else:
-							pass
+						elif x < 4 and SimulationEngine.get_node("PlayerData").workdone > 0:
+							SimulationEngine.get_node("PlayerData").workdone -= 0.2
+						SimulationEngine.get_node("Time_system").ch_sample()
+						statsbar.show_hint("samples changed")
+						$Control/fade/fades.play("fade_out")
+						$Control/fade/text.text="2 hour later"
+						working=true
 				else:
 					statsbar.show_hint("Too late to work.")
 				#by changing samples possibility for next work to give double result
