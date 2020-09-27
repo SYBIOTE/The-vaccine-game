@@ -65,6 +65,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("text:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "fade_out"
@@ -91,6 +103,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("text:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -163,7 +187,7 @@ shape = SubResource( 4 )
 [node name="fade" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,6 +199,7 @@ anims/fade_out = SubResource( 6 )
 anims/new_day = SubResource( 7 )
 
 [node name="text" type="Label" parent="Control/fade"]
+visible = false
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
