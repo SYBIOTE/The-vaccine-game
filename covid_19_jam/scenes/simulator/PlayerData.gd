@@ -1,5 +1,5 @@
 extends Node
-
+onready var data = get_parent().get_node("SaveAndLoadData")
 var isWearingMask #Wearing a mask is a really important factor in deciding the totalRisk.
 var infectionRisk #The risk of infection, this changes depending upon where the player is and also how clean he is.
 var transmissionRisk =.05#The risk of the disease betting transmitted from one person to another.(5% as per research,2% with mask)
@@ -19,7 +19,16 @@ var health=1
 
 var totalRisk #An accumulation of all the factors like wearing mask, cleanliness, health, etc.
 # also the final deciding factor as to wether the player gets infected or not ( can never be 0 )
-
+func preset():
+	var p_data = data.pdata
+	p_data["name"] = ""
+	p_data["health"] = 1
+	p_data["totalRisk"] = 0
+	p_data["workLoad"] = 10
+	p_data["cleanliness"] = 0
+	p_data["transmissionRisk"] =.05
+	p_data["isWearingMask"] = false
+	data.save_data(p_data, data.save_pdata)
 
 func calc_totalRisk(infected):
 	infectionRisk=infected*Interaction_chance*transmissionRisk

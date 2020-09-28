@@ -76,10 +76,10 @@ func calc_show_data():
 #	SimulationEngine.get_node("Calc").calculate_ans(data)
 	if SimulationEngine.get_node("PlayerData").workdone==SimulationEngine.get_node("PlayerData").workLoad:
 		string="cure finished \n you win"
-		loader=ResourceLoader.load_interactive("res://scenes/ui/title.tscn")
+		loader=ResourceLoader.load_interactive("res://scenes/ui/credits.tscn")
 	elif SimulationEngine.get_node("PlayerData").check_if_infected():
 		string="your infected \n game over"
-		loader=ResourceLoader.load_interactive("res://scenes/ui/title.tscn")
+		loader=ResourceLoader.load_interactive("res://scenes/ui/credits.tscn")
 	else:
 		string="total population: "+str(data["totalPopulation"])+"\ninfected: "+str(data["totalInfected"])+"\nhealty: "+str(data["totalHealthy"])+"\n\n risk: "+str(data["infectionRiskPercent"]) +"%"
 	$background/loading.text=string

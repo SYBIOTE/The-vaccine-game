@@ -14,19 +14,9 @@ var percentOfTotalInfected
 # This function will do things when this node is is put in the scene
 func _ready():
 	#print(data.wdata)
-	var world_data = data.wdata
+	
 	if use_presets:
-		#world
-		totalPopulationNum =  1000000
-		totalInfected = 4
-		totalHealthy = totalPopulationNum - totalInfected
-		world_data["totalInfected"] = totalInfected
-		world_data["totalHealthy"] = totalHealthy
-		world_data["totalPopulation"] = totalPopulationNum
-		percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
-		world_data["percentOfTotalInfected"] = percentOfTotalInfected
-		world_data["infectionRiskPercent"] = player_data.calc_totalRisk(totalInfected)
-		data.save_data(world_data, data.save_wdata)
+		presets()
 #	print("Initial percentOfTotalInfected: " + str(percentOfTotalInfected))
 #	var i = 0
 #	print("initial",world_data)
@@ -38,7 +28,21 @@ func _ready():
 #			break
 #		i += 1
 #	print("final",world_data)
-	
+
+func presets():
+			#world
+		var world_data = data.wdata
+		totalPopulationNum =  1000000
+		totalInfected = 4
+		totalHealthy = totalPopulationNum - totalInfected
+		world_data["totalInfected"] = totalInfected
+		world_data["totalHealthy"] = totalHealthy
+		world_data["totalPopulation"] = totalPopulationNum
+		percentOfTotalInfected = (float(totalInfected)/float(totalPopulationNum))*100
+		world_data["percentOfTotalInfected"] = percentOfTotalInfected
+		world_data["infectionRiskPercent"] = player_data.calc_totalRisk(totalInfected)
+		data.save_data(world_data, data.save_wdata)
+		
 func calculate_ans(world_data):
 	var i = 0
 	if world_data["totalInfected"]<world_data["totalPopulation"]:
