@@ -34,6 +34,7 @@ surfaces/1 = {
 }
 
 [sub_resource type="CylinderMesh" id=2]
+radial_segments = 16
 
 [sub_resource type="SpatialMaterial" id=3]
 params_diffuse_mode = 1

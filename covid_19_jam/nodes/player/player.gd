@@ -81,6 +81,7 @@ func sight():
 					sanitizer_use=false
 					$sanitizer_cooldown.start()
 					SimulationEngine.get_node("PlayerData").cleanliness+=.15
+					$Sanitize.play()
 			"mask":
 				print("mask detected")
 				if $cam/mask.visible==false:
@@ -114,6 +115,7 @@ func sight():
 						SimulationEngine.get_node("PlayerData").health+=.3
 						statsbar.show_hint("health recovered")
 						new_day()
+						$Type.play()
 				else:
 					statsbar.show_hint("too late to send a leave application for today")
 			"microscope":
