@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.wav-0aa4504903fd44207a6ae1ec5844d1d0.sample"
+
+[deps]
+
+source_file="res://nodes/player/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.wav"
+dest_files=[ "res://.import/2020-05-05_-_Inspired_Thinking_-_www.FesliyanStudios.com_Steve_Oxen.wav-0aa4504903fd44207a6ae1ec5844d1d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
