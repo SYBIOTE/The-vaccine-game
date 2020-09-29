@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/lab.wav-efa6971b18cc2e36993b2bb7164910f7.sample"
+
+[deps]
+
+source_file="res://nodes/player/music/lab.wav"
+dest_files=[ "res://.import/lab.wav-efa6971b18cc2e36993b2bb7164910f7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=true
+compress/mode=1
