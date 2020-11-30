@@ -1,1 +1,2 @@
-# ait_game_dev_club_covid_19_jam
+# The Vaccine 
+a game developed for the indiecade flattening the curve jam 
